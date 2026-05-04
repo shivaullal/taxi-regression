@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fare Estimation Dashboard</title> 
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-predict">
+    <nav class="navbar">
+    <div class="logo"><i class="fas fa-taxi"></i> Taxi<span>Fare</span></div>
+    <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/predict" class="active">Estimate Fare</a></li>
+        <li><a href="/about">About Us</a></li> 
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+</nav>
+
+    <div class="container">
+        <div class="form-card">
+            <div class="form-header">
+                <h1>Trip Parameters</h1>
+            </div>
+<form action="/predict" method="POST" id="fare-form">
+    <div class="input-grid-three">
+        <div class="field">
+            <label>Distance (km)</label>
+            <input type="number" name="distance" step="0.01" placeholder="e.g. 19.35" required>
+        </div>
+        <div class="field">
+            <label>Time of Day</label>
+            <select name="time_of_day" required>
+                <option value="0">Afternoon</option>
+                <option value="1">Evening</option>
+                <option value="2">Morning</option>
+                <option value="3">Night</option>
+            </select>
+        </div>
+        <div class="field">
+            <label>Day of Week</label>
+            <select name="day_of_week" required>
+                <option value="0">Weekday</option>
+                <option value="1">Weekend</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="input-grid-three">
+        <div class="field">
+            <label>Passenger Count</label>
+            <select name="passengers" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+        </div>
+        <div class="field">
+            <label>Traffic Conditions</label>
+            <select name="traffic" required>
+                <option value="0">High</option>
+                <option value="1">Low</option>
+                <option value="2">Medium</option>
+            </select>
+        </div>
+        <div class="field">
+            <label>Weather</label>
+            <select name="weather" required>
+                <option value="0">Clear</option>
+                <option value="1">Rain</option>
+                <option value="2">Snow</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="highlight-box">
+        <div class="input-grid">
+            <div class="field">
+                <label>Base Fare ($)</label>
+                <input type="number" name="base_fare" step="0.01" placeholder="e.g. 3.56" required>
+            </div>
+            <div class="field">
+                <label>Trip Duration (Min)</label>
+                <input type="number" name="duration" step="0.01" placeholder="e.g. 53.82" required>
+            </div>
+        </div>
+        <div class="input-grid">
+            <div class="field">
+                <label>Per Km Rate</label>
+                <input type="number" name="per_km" step="0.01" placeholder="e.g. 0.80" required>
+            </div>
+            <div class="field">
+                <label>Per Minute Rate</label>
+                <input type="number" name="per_min" step="0.01" placeholder="e.g. 0.32" required>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="predict-btn">Calculate Estimated Fare</button>
+</form>
+           
+            {% if prediction %}
+            <div class="result-area">
+                <h1 style="text-align:center;font-size:24px;color:#f39c12;margin-top:20px;">
+                    <i class="fas fa-wallet"></i> Estimated Fare: {{prediction}}
+                </h1>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | TaxiFare</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="auth-page">
+    <div class="auth-card">
+        <div class="auth-info">
+            <h1>Taxi<span>Fare</span></h1>
+            <p>Experience precision with our accurate Random Forest model. Sign in to access real-time fare estimations based on current traffic and weather conditions.</p>
+        </div>
+
+        <div class="auth-form-area">
+            <h2>Welcome Back</h2>
+            <p class="subtitle" style="margin-bottom: 20px; color: #666;">Enter your details to sign in</p>
+
+            {% for m in get_flashed_messages() %}
+                <div style="color: #d9534f; font-size: 0.8rem; margin-bottom: 15px; font-weight: 600;">
+                    <i class="fas fa-exclamation-circle"></i> {{m}}
+                </div>
+            {% endfor %}
+
+            <form action="/login" method="POST">
+                <div class="field">
+                    <label>Email Address</label>
+                    <input type="email" name="email" placeholder="user@example.com" required>
+                </div>
+                <div class="field">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn-taxi">Sign In</button>
+            </form>
+
+            <p class="switch-text">New user? <a href="/register">Register Now</a></p>
+        </div>
+    </div>
+</body>
+</html>

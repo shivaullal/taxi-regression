@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaxiFare AI | Smart Estimation</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+   <nav class="navbar">
+    <div class="logo"><i class="fas fa-taxi"></i> Taxi<span>Fare</span></div>
+    <ul class="nav-links">
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+        <li><a href="{{ url_for('predict') }}">Estimate Fare</a></li>
+        <li><a href="{{ url_for('about') }}">About Us</a></li> 
+        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+    </ul>
+</nav>
+
+    <header class="hero">
+        <img src="static\image\cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTExL2lzMTUwOTQtaW1hZ2UuanBn.webp" class="hero-bg" alt="City Taxi">
+        <div class="hero-overlay">
+            <div class="hero-content">
+               
+                <h1>Know Your <span class="highlight">Fare</span> Before You Go</h1>
+               
+                <a href="/predict" class="btn-main">Calculate Now <i class="fas fa-calculator"></i></a>
+             
+
+            </div>
+        </div>
+    </header>
+</body>
+</html>

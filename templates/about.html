@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | TaxiFare Methodology</title> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+ {% for m in get_flashed_messages() %}
+                <div style="color: #d9534f; font-size: 0.8rem; margin-bottom: 15px; font-weight: 600;">
+                    <i class="fas fa-exclamation-circle"></i> {{m}}
+                </div>
+            {% endfor %}
+<body class="bg-predict">
+    <nav class="navbar">
+        <div class="logo"><i class="fas fa-taxi"></i> Taxi<span>Fare</span></div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/predict">Estimate Fare</a></li>
+            <li><a href="/about" class="active">About Us</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="form-card" style="max-width: 800px;">
+            <div class="form-header">
+                <h1>Model Comparison & Methodology</h1>
+                <p>An overview of our machine learning pipeline and performance metrics.</p>
+            </div>
+
+            <div class="form-header" style="margin-top: 20px;">
+                <h2 style="font-size: 1.1rem; text-transform: uppercase; color: #111;">Model Performance</h2><br>
+            </div>
+            <div class="highlight-box">
+                <div class="input-grid-three">
+                    <div class="field">
+                        <label>Random Forest (Best)</label>
+                        <input type="text" value="93.17% Accuracy" readonly style="color: #27ae60; font-weight: bold;">
+                    </div>
+                    <div class="field">
+                        <label>Decision Tree</label>
+                        <input type="text" value="80.85% Accuracy" readonly>
+                    </div>
+                    <div class="field">
+                        <label>SVR</label>
+                        <input type="text" value="44.22% Accuracy" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-header" style="margin-top: 30px;">
+                <h2 style="font-size: 1.1rem; text-transform: uppercase; color: #111;">Detailed Methodology</h2>
+            </div>
+
+            <div style="text-align: left; padding: 10px 0;">
+                <div style="margin-bottom: 20px;">
+                    <h3 style="font-size: 1rem; color: var(--taxi-yellow); margin-bottom: 5px;"><i class="fas fa-broom"></i> 1. Data Cleaning & Imputation</h3>
+                    <p style="font-size: 0.9rem; color: #555; line-height: 1.5;">
+                        Missing values in the dataset were handled systematically. Numeric columns were filled using the <strong>median</strong> value, while categorical columns were filled using the <strong>mode</strong>.
+                    </p>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <h3 style="font-size: 1rem; color: var(--taxi-yellow); margin-bottom: 5px;"><i class="fas fa-layer-group"></i> 2. Feature Engineering</h3>
+                    <p style="font-size: 0.9rem; color: #555; line-height: 1.5;">
+                        Categorical features (Time of Day, Weather, Traffic, etc.) were transformed into numeric format using <strong>Label Encoding</strong> to ensure compatibility with regression algorithms.
+                    </p>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <h3 style="font-size: 1rem; color: var(--taxi-yellow); margin-bottom: 5px;"><i class="fas fa-vial"></i> 3. Model Training & Selection</h3>
+                    <p style="font-size: 0.9rem; color: #555; line-height: 1.5;">
+                        We evaluated three distinct models using an 80/20 train-test split:
+                        <ul style="margin-left: 20px; margin-top: 10px; font-size: 0.85rem; color: #666;">
+                            <li><strong>Decision Tree Regressor:</strong> Achieved an 80.85% R² score but showed signs of overfitting.</li>
+                            <li><strong>SVR (Support Vector Regression):</strong> Performed poorly on this dataset with only a 44.22% R² score.</li>
+                            <li><strong>Random Forest Regressor:</strong> The final selected model, utilizing 200 estimators to achieve a superior 93.17% R² score and a low MAE of 5.36.</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+            <a href="/predict">
+                <button class="predict-btn" style="margin-top: rem;">Return to Dashboard</button>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

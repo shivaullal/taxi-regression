@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register | TaxiFare</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="auth-page">
+    <div class="auth-card">
+        <div class="auth-info">
+            <h1>Taxi<span>Fare</span></h1>
+            <p>Join the platform using advanced data cleaning and median imputation to ensure reliable trip pricing. Our algorithm processes distance, duration, and passenger count for every estimate.</p>
+        </div>
+
+        <div class="auth-form-area">
+            <h2>Create Account</h2>
+            <p class="subtitle" style="margin-bottom: 20px; color: #666;">Join our community of travelers</p>
+
+            {% for m in get_flashed_messages() %}
+                <div style="color: #d9534f; font-size: 0.8rem; margin-bottom: 15px; font-weight: 600;">
+                    <i class="fas fa-exclamation-circle"></i> {{m}}
+                </div>
+            {% endfor %}
+
+            <form action="/register" method="POST">
+                <div class="field">
+                    <label>Full Name</label>
+                    <input type="text" name="name" placeholder="John Doe" required>
+                </div>
+                <div class="field">
+                    <label>Email Address</label>
+                    <input type="email" name="email" placeholder="user@example.com" required>
+                </div>
+                <div class="field">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Minimum 8 characters" required>
+                </div>
+                <button type="submit" class="btn-taxi">Create Account</button>
+            </form>
+
+            <p class="switch-text">Member already? <a href="/login">Login Here</a></p>
+        </div>
+    </div>
+</body>
+</html>
