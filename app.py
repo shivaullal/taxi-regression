@@ -3,7 +3,7 @@ import numpy as np
 import pickle
 # from supabase_config import supabase
 from hashlib import sha256
-
+from sklearn.linear_model import LinearRegression
 app = Flask(__name__)
 app.secret_key = '4321'
 
