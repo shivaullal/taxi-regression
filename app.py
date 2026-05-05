@@ -10,13 +10,13 @@ app.secret_key = '4321'
 with open("Taxi.pkl", "rb") as f:
     model = pickle.load(f)
   
-def hash_password(password):
-    return sha256(password.encode()).hexdigest()    
+# def hash_password(password):
+#     return sha256(password.encode()).hexdigest()    
 
 @app.route("/")
 def index():
-    if "user_id" not in session:
-        return redirect(url_for("login"))
+    # if "user_id" not in session:
+    #     return redirect(url_for("login"))
     
     return render_template("index.html")
 
@@ -27,48 +27,48 @@ def about():
     # if you want the public to see your model accuracy.
     return render_template("about.html")
 
-@app.route('/register', methods=["GET", "POST"])
-def register():
-    if request.method == 'POST':
-        name = request.form.get('name')
-        email = request.form.get('email')
-        password = request.form.get('password')
+# @app.route('/register', methods=["GET", "POST"])
+# def register():
+#     if request.method == 'POST':
+#         name = request.form.get('name')
+#         email = request.form.get('email')
+#         password = request.form.get('password')
 
-        existing = supabase.table("users").select("*").eq("email", email).execute()
-        if existing.data:
-            flash("Email already exists", "error")
-            return redirect(url_for("register"))
-        hashed_password = hash_password(password)
-        supabase.table("users").insert({
-            "uname": name,
-            "email": email,
-            "password": hashed_password
-        }).execute()
-        flash("Registered successfully", "success")
-        return redirect(url_for("index"))
-    return render_template("register.html")
+#         existing = supabase.table("users").select("*").eq("email", email).execute()
+#         if existing.data:
+#             flash("Email already exists", "error")
+#             return redirect(url_for("register"))
+#         hashed_password = hash_password(password)
+#         supabase.table("users").insert({
+#             "uname": name,
+#             "email": email,
+#             "password": hashed_password
+#         }).execute()
+#         flash("Registered successfully", "success")
+#         return redirect(url_for("index"))
+#     return render_template("register.html")
 
-@app.route('/login', methods=["GET", "POST"])
-def login():
-    if request.method == "POST":
-        email = request.form.get("email")
-        password = request.form.get("password")
-        response = supabase.table("users").select("*").eq("email", email).execute()
-        user = None
-        if response.data:
-            user = response.data[0]
+# @app.route('/login', methods=["GET", "POST"])
+# def login():
+#     if request.method == "POST":
+#         email = request.form.get("email")
+#         password = request.form.get("password")
+#         response = supabase.table("users").select("*").eq("email", email).execute()
+#         user = None
+#         if response.data:
+#             user = response.data[0]
 
-            if user and hash_password(password) == user["password"]:
-                session['user_id'] = user["u_id"]
-                session['username'] = user["uname"]
-                session['email'] = user["email"]
+#             if user and hash_password(password) == user["password"]:
+#                 session['user_id'] = user["u_id"]
+#                 session['username'] = user["uname"]
+#                 session['email'] = user["email"]
 
-                flash("Login successful", "success")
-                return redirect(url_for("index"))
-            else:
-                flash("Invalid email or password", "error")
-                return redirect(url_for("login"))
-    return render_template('login.html')
+#                 flash("Login successful", "success")
+#                 return redirect(url_for("index"))
+#             else:
+#                 flash("Invalid email or password", "error")
+#                 return redirect(url_for("login"))
+#     return render_template('login.html')
 
 @app.route("/predict", methods=["GET", "POST"])
 def predict():
