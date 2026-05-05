@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, session, url_for, flash
 import numpy as np
 import pickle
-from supabase_config import supabase
+# from supabase_config import supabase
 from hashlib import sha256
 
 app = Flask(__name__)
